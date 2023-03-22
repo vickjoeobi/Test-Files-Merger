@@ -12,7 +12,7 @@ runs:
         npm ci --prefix "${{ github.action_path }}"
         echo "Dependencies installed."
       shell: bash
-    - run: node "/home/runner/work/Test-Files-Merger/Test-Files-Merger/src/main.js"
+    - run: node "/home/runner/work/Test-Files-Merger/src/main.js"
       shell: bash
       env:
         INPUT_TOKEN: ${{ inputs.token }}
