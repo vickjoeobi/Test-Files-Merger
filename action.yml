@@ -7,8 +7,11 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: ${{ github.action_path }}/src/install-dependencies.js
-      shell: node
+    - run: |
+        echo "Installing dependencies..."
+        npm ci --prefix "${{ github.action_path }}"
+        echo "Dependencies installed."
+      shell: bash
     - run: ${{ github.action_path }}/src/main.js
       shell: node
       env:
