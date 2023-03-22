@@ -12,6 +12,9 @@ async function run() {
 
     // 1. Read repositoryname.json
     const repositoryJsonPath = path.join(process.env.GITHUB_WORKSPACE, `${repoName}.json`);
+    if (!fs.existsSync(repositoryJsonPath)) {
+      throw new Error(`File ${repositoryJsonPath} not found`);
+    }
     const repositoryJson = JSON.parse(fs.readFileSync(repositoryJsonPath, 'utf8'));
 
     // 2. Get the last commit from vickjoeobi/testFiles
@@ -20,6 +23,9 @@ async function run() {
       repo: 'testFiles',
       per_page: 1,
     });
+    if (testFilesCommits.length === 0) {
+      throw new Error('No commits found in vickjoeobi/testFiles');
+    }
     const lastCommitSha = testFilesCommits[0].sha;
 
     // 3. Get orchestrator.json from the last commit
@@ -29,6 +35,9 @@ async function run() {
       path: 'orchestrator.json',
       ref: lastCommitSha,
     });
+    if (!orchestratorJsonContent.content) {
+      throw new Error(`File orchestrator.json not found in commit ${lastCommitSha}`);
+    }
     const orchestratorJson = JSON.parse(
       Buffer.from(orchestratorJsonContent.content, 'base64').toString('utf8')
     );
