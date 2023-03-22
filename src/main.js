@@ -13,7 +13,7 @@ async function run() {
     // 1. Read repositoryname.json
     const repositoryJsonPath = path.join(process.env.GITHUB_WORKSPACE, `${repoName}.json`);
     if (!fs.existsSync(repositoryJsonPath)) {
-      throw new Error(`File ${repositoryJsonPath} not found`);
+      throw new Error(`File ${repositoryJsonPath} not found. Make sure it exists in your repository root directory.`);
     }
     const repositoryJson = JSON.parse(fs.readFileSync(repositoryJsonPath, 'utf8'));
 
@@ -24,7 +24,7 @@ async function run() {
       per_page: 1,
     });
     if (testFilesCommits.length === 0) {
-      throw new Error('No commits found in vickjoeobi/testFiles');
+      throw new Error('No commits found in vickjoeobi/testFiles. Make sure the repository exists and has at least one commit.');
     }
     const lastCommitSha = testFilesCommits[0].sha;
 
@@ -36,7 +36,7 @@ async function run() {
       ref: lastCommitSha,
     });
     if (!orchestratorJsonContent.content) {
-      throw new Error(`File orchestrator.json not found in commit ${lastCommitSha}`);
+      throw new Error(`File orchestrator.json not found in commit ${lastCommitSha}. Make sure the file exists in the repository and is part of the commit.`);
     }
     const orchestratorJson = JSON.parse(
       Buffer.from(orchestratorJsonContent.content, 'base64').toString('utf8')
