@@ -1,0 +1,26 @@
+{
+    "name": "test-files-merger",
+    "version": "1.0.0",
+    "description": "Merges repositoryname.json and orchestrator.json from vickjoeobi/testFiles",
+    "main": "src/main.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/vickjoeobi/test-files-merger.git"
+    },
+    "keywords": [
+      "github-action"
+    ],
+    "author": "vickjoe",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/vickjoeobi/test-files-merger/issues"
+    },
+    "homepage": "https://github.com/vickjoeobi/test-files-merger#readme",
+    "dependencies": {
+      "@octokit/rest": "^18.12.0"
+    }
+  }
+  

@@ -1,0 +1,9 @@
+name: "Test Files Merger"
+description: "Merges repositoryname.json and orchestrator.json from vickjoeobi/testFiles"
+inputs:
+  token:
+    description: "GitHub token"
+    required: true
+runs:
+  using: "node12"
+  main: "src/main.js"
